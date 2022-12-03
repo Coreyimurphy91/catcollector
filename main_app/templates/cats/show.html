@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="card text-center">
+    <div class="card-header">
+        Featured kitta
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ cat.name }}</h5>
+        <p class="card-text">{{ cat.description }}</p>
+        <p class="card-text"> Breed: {{ cat.breed }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        Age: {{ cat.age }}
+    </div>
+</div>
+{% endblock %}
