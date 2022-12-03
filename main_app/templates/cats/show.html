@@ -12,5 +12,11 @@
     <div class="card-footer text-muted">
         Age: {{ cat.age }}
     </div>
+    <div>
+        <a class="btn btn-warning" href="/cats/{{cat.id}}/update">Update {{ cat.name }}?</a>
+        <a class="btn btn-warning" href="{% url 'cats_update' cat.id %}">Update {{ cat.name }}?</a>
+        <a class="btn btn-danger" href="/cats/{{cat.id}}/delete">Delete {{ cat.name }}?</a>
+        <a class="btn btn-danger" href="{% url 'cats_delete' cat.id %}">Delete {{ cat.name }}?</a>
+    </div>
 </div>
 {% endblock %}
