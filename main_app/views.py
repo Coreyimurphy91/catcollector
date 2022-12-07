@@ -83,3 +83,7 @@ def login_view(request):
     else: # it was a get request so send the emtpy login form
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+  logout(request)
+  return HttpResponseRedirect('/cats')
