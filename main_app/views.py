@@ -7,7 +7,10 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
+@method_decorator(login_required, name='dispatch')
 class CatCreate(CreateView):
   model = Cat
   fields = '__all__'
@@ -19,11 +22,13 @@ class CatCreate(CreateView):
     self.object.save()
     return HttpResponseRedirect('/cats')
 
+@method_decorator(login_required, name='dispatch')
 class DogCreate(CreateView):
   model = Dog
   fields = '__all__'
   success_url = '/'
 
+@method_decorator(login_required, name='dispatch')
 class CatUpdate(UpdateView):
   model = Cat
   fields = ['name', 'breed', 'description', 'age']
@@ -33,6 +38,7 @@ class CatUpdate(UpdateView):
     self.object.save()
     return HttpResponseRedirect('/cats/' + str(self.object.pk))
 
+@method_decorator(login_required, name='dispatch')
 class CatDelete(DeleteView):
   model = Cat
   success_url = '/cats'
@@ -59,6 +65,7 @@ def cats_show(request, cat_id):
     cat = Cat.objects.get(id=cat_id)
     return render(request, 'cats/show.html', { 'cat': cat })
 
+@login_required
 def profile(request,username):
   user = User.objects.get(username=username)
   cats = list(Cat.objects.filter(user=user))
